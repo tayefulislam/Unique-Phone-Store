@@ -6,3 +6,11 @@
     margin-top: 10px;
    
 }
+
+.card{
+    background-color: rgb(199, 221, 230);
+}
+
+img{
+    border-radius: 45px;
+}
