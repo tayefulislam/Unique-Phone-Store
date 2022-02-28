@@ -79,7 +79,13 @@ const details = (id) => {
     console.log(id)
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(result => displayDetails(result.data))
+
+
+}
+
+
+const displayDetails = (phone) => {
 
 
     const modalId = document.getElementById('detail-modal');
@@ -87,26 +93,41 @@ const details = (id) => {
     
 
     <div class="modal-header">
-    <h5 class="modal-title" id="detailsModalLabel">Modal title</h5>
+    <h2 class="modal-title" id="detailsModalLabel">${phone.name}</h2>
+    
     <button type="button" class="btn-close" data-bs-dismiss="modal"
         aria-label="Close"></button>
     </div>
 
     <div class="modal-body">
             <div>
+            <h5>Brand : ${phone.brand}</h5>
+            <img src="${phone.image}">
 
-            </div>
+        
+            <h3>${releaseDateCheck(phone.releaseDate)}</h3>
 
-    </div>
-    
+            
+
+            </div >
+
+    </div >
+
     `
 
-    console.log(modalId)
-
-
+    console.log(phone)
 
 
 }
 
 
+const releaseDateCheck = (value) => {
 
+    console.log(value)
+    if (value === "") {
+        return "Released Date Not Found"
+    }
+    else {
+        return value;
+    }
+}
