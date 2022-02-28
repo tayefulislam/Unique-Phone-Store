@@ -1,5 +1,7 @@
+// get result field 
 const setResult = document.getElementById('result');
 
+// take user input
 document.getElementById('search-btn').addEventListener('click', function () {
 
     const getInput = document.getElementById('search');
@@ -8,6 +10,7 @@ document.getElementById('search-btn').addEventListener('click', function () {
 
 });
 
+// loadData
 const loadData = (value) => {
     // console.log(value);
     const url = `https://openapi.programming-hero.com/api/phones?search=${value}`;
@@ -29,18 +32,18 @@ const loadData = (value) => {
 
 // set result 
 
-
-
-
 const result = (results) => {
     console.log(results);
 
     setResult.innerHTML = ``;
 
+    // for of loop in results array
     for (const result of results) {
 
         const div = document.createElement('div');
+
         div.classList.add('col');
+
         div.innerHTML = `
                 <div class="card h-100">
                         <img class="mt-3" src="${result.image}"
@@ -58,40 +61,29 @@ const result = (results) => {
 
                         </div>
                     </div>
-
     `
-
-
         // console.log(setResult);
 
         setResult.appendChild(div);
-
-
-
     }
-
-
 
 }
 
+// Get Result by ID (slug)
 
 const details = (id) => {
     console.log(id)
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
         .then(result => displayDetails(result.data))
-
-
 }
 
+// Display Modal (All Details)
 
 const displayDetails = (phone) => {
 
-
     const modalId = document.getElementById('detail-modal');
     modalId.innerHTML = `
-    
-
     <div class="modal-header">
     <h2 class="modal-title" id="detailsModalLabel">${phone.name}</h2>
     
@@ -101,26 +93,37 @@ const displayDetails = (phone) => {
 
     <div class="modal-body">
             <div>
-            <h5>Brand : ${phone.brand}</h5>
-            <img src="${phone.image}">
-
-        
-            <h3>${releaseDateCheck(phone.releaseDate)}</h3>
-
             
+            <img src="${phone.image}">
+            <br>
 
+            <h3>Brand : ${phone.brand}</h3>
+            <h5>${releaseDateCheck(phone.releaseDate)}</h5>
+            <h4>Features:</h4>
+            <p>Storage : ${phone.mainFeatures.storage} <br>
+            Display Size : ${phone.mainFeatures.displaySize} <br>
+            Chip Set : ${phone.mainFeatures.chipSet} <br>
+            Memory : ${phone.mainFeatures.memory} <br>
+            </p>
+
+            <h4>Others:</h4>
+            <p>Bluetooth : ${phone.others.Bluetooth} <br>
+            GPS : ${phone.others.GPS} <br>
+            NFC : ${phone.others.NFC} <br>
+            Radio : ${phone.others.Radio} <br>
+            USB : ${phone.others.USB} <br>
+            WLAN : ${phone.others.WLAN} <br>
+            </p>
             </div >
 
     </div >
 
     `
-
     console.log(phone)
-
-
 }
 
 
+// Check Release Date
 const releaseDateCheck = (value) => {
 
     console.log(value)
@@ -131,3 +134,4 @@ const releaseDateCheck = (value) => {
         return value;
     }
 }
+
