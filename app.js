@@ -8,34 +8,34 @@ const setResult = document.getElementById('result');
 // common funtion
 
 // Check Release Date
-const releaseDateCheck = (value) => {
+const releaseDateCheck = (valueDate) => {
 
-    if (value === "") {
-        return "Released Date Not Found"
+    if (valueDate === "") {
+        return "Released Date Not Found";
     }
 
     else {
-        return value;
+        return valueDate;
     }
 }
 
 //check data 
 
-const checkData = (value) => {
+const checkData = (valueData) => {
 
-    if (value === undefined) {
-        return " Data Not Found"
+    if (valueData === undefined) {
+        return " Data Not Found";
     }
 
     else {
-        return value;
+        return valueData;
     }
 
 
 
 }
 
-//sensor 
+//sensors
 
 const sensor = (sensors) => {
     let totalSensor = '';
@@ -43,7 +43,7 @@ const sensor = (sensors) => {
         totalSensor = totalSensor + sensor + ', ';
     });
 
-    let totalSensorDot = totalSensor.slice(0, totalSensor.length - 2)
+    let totalSensorDot = totalSensor.slice(0, totalSensor.length - 2);
     return totalSensorDot + '.';
 }
 
@@ -51,7 +51,6 @@ const sensor = (sensors) => {
 // Display alert
 
 const showAlert = (alertId, alert) => {
-
     document.getElementById(alertId).style.display = alert;
 }
 
@@ -80,27 +79,26 @@ document.getElementById('search-btn').addEventListener('click', function () {
 
 
 // loadData
-const loadData = (value) => {
+const loadData = (inputValue) => {
 
-    const url = `https://openapi.programming-hero.com/api/phones?search=${value}`;
-
+    const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`;
 
     fetch(url)
         .then(response => response.json())
-        .then(data => {
-            if (data.status === false) {
+        .then(results => {
+            if (results.status === false) {
 
                 setResult.innerHTML = ``;
                 showAlert('not-found', 'block');
-                showAlert('empty', 'none')
+                showAlert('empty', 'none');
 
             }
 
             else {
 
                 showAlert('not-found', 'none');
-                showAlert('empty', 'none')
-                result(data.data);
+                showAlert('empty', 'none');
+                searchResult(results.data);
 
             }
         })
@@ -111,7 +109,7 @@ const loadData = (value) => {
 // display result 
 
 // set result 
-const result = (results) => {
+const searchResult = (results) => {
 
     setResult.innerHTML = ``;
 
@@ -127,10 +125,10 @@ const result = (results) => {
                         <img class="mt-3 img-body" src="${result.image}"
                             class="card-img-top">
                         <div class="card-body">
-                            <h2 class="card-title">${result.phone_name}</h2>
-                            <h5>Brand : ${result.brand}</h5>
+                            <h2 class="card-title">${checkData(result?.phone_name)}</h2>
+                            <h5>Brand : ${checkData(result?.brand)}</h5>
                             <div class="d-grid gap-2 col-6 mx-auto">
-                                <button onclick=details('${result.slug}') class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                <button onclick=details('${checkData(result?.slug)}') class="btn btn-primary" type="button" data-bs-toggle="modal"
                                     data-bs-target="#detailsModal">
                                     Details
                                 </button>
@@ -149,9 +147,8 @@ const result = (results) => {
 
 // Get Result by ID (slug)
 
-const details = (id) => {
-    console.log(id)
-    fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
+const details = (phoneId) => {
+    fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
         .then(res => res.json())
         .then(result => displayDetails(result.data))
 
@@ -164,7 +161,7 @@ const displayDetails = (phone) => {
     const modalId = document.getElementById('detail-modal');
     modalId.innerHTML = `
             <div class="modal-header">
-            <h2 class="modal-title" id="detailsModalLabel">${phone.name}</h2>
+            <h2 class="modal-title" id="detailsModalLabel">${checkData(phone?.name)}</h2>
             
             <button type="button" class="btn-close" data-bs-dismiss="modal"
                 aria-label="Close"></button>

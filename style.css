@@ -29,9 +29,10 @@ body{
 
 /* alerts */
 .alert{
-    color: red;
+    color: rgba(243, 16, 0, 0.726);
     text-align: center;
     display: none;
+    font-size: 40px;
 }
 
 
