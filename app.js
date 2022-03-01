@@ -10,6 +10,7 @@ document.getElementById('search-btn').addEventListener('click', function () {
 
 });
 
+
 // loadData
 const loadData = (value) => {
     // console.log(value);
@@ -23,6 +24,8 @@ const loadData = (value) => {
                 setResult.innerHTML = ``;
             }
             else {
+
+
                 result(data.data);
             }
         })
@@ -101,19 +104,20 @@ const displayDetails = (phone) => {
             <h3>Brand : ${phone.brand}</h3>
             <h5>${releaseDateCheck(phone.releaseDate)}</h5>
             <h4>Features:</h4>
-            <p>Storage : ${phone.mainFeatures.storage} <br>
-            Display Size : ${phone.mainFeatures.displaySize} <br>
-            Chip Set : ${phone.mainFeatures.chipSet} <br>
-            Memory : ${phone.mainFeatures.memory} <br>
+            <p>
+            <span class="fw-bold"> Storage :</span> ${phone.mainFeatures.storage} <br>
+            <span class="fw-bold"> Display Size :</span> ${phone.mainFeatures.displaySize} <br>
+            <span class="fw-bold"> Chip Set :</span> ${phone.mainFeatures.chipSet} <br>
+            <span class="fw-bold"> Memory :</span> ${phone.mainFeatures.memory} <br>
             </p>
 
             <h4>Others:</h4>
-            <p>Bluetooth : ${phone.others.Bluetooth} <br>
-            GPS : ${phone.others.GPS} <br>
-            NFC : ${phone.others.NFC} <br>
-            Radio : ${phone.others.Radio} <br>
-            USB : ${phone.others.USB} <br>
-            WLAN : ${phone.others.WLAN} <br>
+            <p> <span class="fw-bold"> Bluetooth :</span> ${phone.others.Bluetooth} <br>
+            <span class="fw-bold"> GPS :</span> ${phone.others.GPS} <br>
+            <span class="fw-bold"> NFC :</span> ${phone.others.NFC} <br>
+            <span class="fw-bold"> Radio :</span> ${phone.others.Radio} <br>
+            <span class="fw-bold"> USB :</span> ${phone.others.USB} <br>
+            <span class="fw-bold"> WLAN :</span> ${phone.others.WLAN} <br>
             </p>
 
             <p> <span class="fw-bold">SENSOR :</span> ${phone.mainFeatures.sensors} </p>
@@ -138,16 +142,3 @@ const releaseDateCheck = (value) => {
         return value;
     }
 }
-
-// check sennor
-
-// const checkSensor = (sensor) => {
-
-//     sensors.forEach(sensor => {
-
-//         console.log(sensor);
-
-//     });
-
-
-// }
