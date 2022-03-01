@@ -5,21 +5,19 @@
 const setResult = document.getElementById('result');
 
 
-// common funtion 
-
+// common funtion
 
 // Check Release Date
 const releaseDateCheck = (value) => {
 
-    console.log(value)
     if (value === "") {
         return "Released Date Not Found"
     }
+
     else {
         return value;
     }
 }
-
 
 //check data 
 
@@ -36,8 +34,6 @@ const checkData = (value) => {
 
 
 }
-
-
 
 //sensor 
 
@@ -60,17 +56,12 @@ const showAlert = (alertId, alert) => {
 }
 
 
-
-
-
-
-
-
 // take user input
 document.getElementById('search-btn').addEventListener('click', function () {
 
     const getInput = document.getElementById('search');
     const inputValue = getInput.value.toLowerCase();
+
     getInput.value = '';
 
     if (inputValue == '') {
@@ -79,35 +70,32 @@ document.getElementById('search-btn').addEventListener('click', function () {
         setResult.innerHTML = ``;
     }
 
-
     else {
-
         showAlert('empty', 'none');
         showAlert('not-found', 'none');
         return loadData(inputValue);
-
     }
-
-
-
 
 });
 
 
 // loadData
 const loadData = (value) => {
-    // console.log(value);
+
     const url = `https://openapi.programming-hero.com/api/phones?search=${value}`;
+
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
             if (data.status === false) {
-                console.log('result not fount')
+
                 setResult.innerHTML = ``;
                 showAlert('not-found', 'block');
                 showAlert('empty', 'none')
+
             }
+
             else {
 
                 showAlert('not-found', 'none');
@@ -118,27 +106,26 @@ const loadData = (value) => {
         })
 }
 
+
+
 // display result 
 
 // set result 
-
 const result = (results) => {
-    console.log(results);
-    console.log(results.slice(0, 20));
 
     setResult.innerHTML = ``;
 
     // for of loop in results array
+
     for (const result of results.slice(0, 20)) {
 
         const div = document.createElement('div');
-
         div.classList.add('col');
 
         div.innerHTML = `
                 <div class="card h-100">
                         <img class="mt-3 img-body" src="${result.image}"
-                            class="card-img-top" alt="...">
+                            class="card-img-top">
                         <div class="card-body">
                             <h2 class="card-title">${result.phone_name}</h2>
                             <h5>Brand : ${result.brand}</h5>
@@ -153,14 +140,15 @@ const result = (results) => {
                         </div>
                     </div>
     `
-        // console.log(setResult);
 
         setResult.appendChild(div);
     }
 
 }
 
+
 // Get Result by ID (slug)
+
 const details = (id) => {
     console.log(id)
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
@@ -173,21 +161,20 @@ const details = (id) => {
 
 const displayDetails = (phone) => {
 
-
     const modalId = document.getElementById('detail-modal');
     modalId.innerHTML = `
-    <div class="modal-header">
-    <h2 class="modal-title" id="detailsModalLabel">${phone.name}</h2>
-    
-    <button type="button" class="btn-close" data-bs-dismiss="modal"
-        aria-label="Close"></button>
-    </div>
+            <div class="modal-header">
+            <h2 class="modal-title" id="detailsModalLabel">${phone.name}</h2>
+            
+            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                aria-label="Close"></button>
+            </div>
 
-    <div class="modal-body">
+            <div class="modal-body">
             <div>
             
             <img src="${phone?.image}">
-            <br>
+            <br>     
 
             <h3>Brand : ${checkData(phone?.brand)}</h3>
             <h5>${releaseDateCheck(checkData(phone?.releaseDate))}</h5>
@@ -199,8 +186,10 @@ const displayDetails = (phone) => {
             <span class="fw-bold"> Memory :</span> ${checkData(phone.mainFeatures?.memory)} <br>
             </p>
 
-            <h4>Others Features:</h4>
+            <p> <span class="fw-bold">SENSOR :</span> ${checkData(sensor(phone.mainFeatures?.sensors))} </p>
 
+            <h4>Others Features:</h4>
+         
             <p> <span class="fw-bold"> Bluetooth :</span> ${checkData(phone.others?.Bluetooth)} <br>
             <span class="fw-bold"> GPS :</span> ${checkData(phone.others?.GPS)} <br>
             <span class="fw-bold"> NFC :</span> ${checkData(phone.others?.NFC)} <br>
@@ -210,16 +199,11 @@ const displayDetails = (phone) => {
            
             </p>
 
-            <p> <span class="fw-bold">SENSOR :</span> ${checkData(sensor(phone.mainFeatures?.sensors))} </p>
-
             </div >
 
             
-
-
     </div >
 
     `
-    console.log(phone.mainFeatures?.sensors)
 }
 
