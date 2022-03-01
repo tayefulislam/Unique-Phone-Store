@@ -52,6 +52,16 @@ const sensor = (sensors) => {
 }
 
 
+// Display alert
+
+const showAlert = (alertId, alert) => {
+
+    document.getElementById(alertId).style.display = alert;
+}
+
+
+
+
 
 
 
@@ -60,8 +70,26 @@ const sensor = (sensors) => {
 document.getElementById('search-btn').addEventListener('click', function () {
 
     const getInput = document.getElementById('search');
-    const inputValue = loadData(getInput.value.toLowerCase());
+    const inputValue = getInput.value.toLowerCase();
     getInput.value = '';
+
+    if (inputValue == '') {
+        showAlert('empty', 'block');
+        showAlert('not-found', 'none');
+        setResult.innerHTML = ``;
+    }
+
+
+    else {
+
+        showAlert('empty', 'none');
+        showAlert('not-found', 'none');
+        return loadData(inputValue);
+
+    }
+
+
+
 
 });
 
@@ -77,11 +105,15 @@ const loadData = (value) => {
             if (data.status === false) {
                 console.log('result not fount')
                 setResult.innerHTML = ``;
+                showAlert('not-found', 'block');
+                showAlert('empty', 'none')
             }
             else {
 
-
+                showAlert('not-found', 'none');
+                showAlert('empty', 'none')
                 result(data.data);
+
             }
         })
 }
@@ -159,7 +191,7 @@ const displayDetails = (phone) => {
 
             <h3>Brand : ${checkData(phone?.brand)}</h3>
             <h5>${releaseDateCheck(checkData(phone?.releaseDate))}</h5>
-            <h4>Features:</h4>
+            <h4>Main Features:</h4>
             <p>
             <span class="fw-bold"> Storage :</span> ${checkData(phone.mainFeatures?.storage)} <br>
             <span class="fw-bold"> Display Size :</span> ${checkData(phone.mainFeatures?.displaySize)} <br>
@@ -167,7 +199,7 @@ const displayDetails = (phone) => {
             <span class="fw-bold"> Memory :</span> ${checkData(phone.mainFeatures?.memory)} <br>
             </p>
 
-            <h4>Others:</h4>
+            <h4>Others Features:</h4>
 
             <p> <span class="fw-bold"> Bluetooth :</span> ${checkData(phone.others?.Bluetooth)} <br>
             <span class="fw-bold"> GPS :</span> ${checkData(phone.others?.GPS)} <br>

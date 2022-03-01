@@ -19,3 +19,9 @@
     font-style: blod;
 }
 
+.alert{
+    color: red;
+    text-align: center;
+    display: none;
+}
+
