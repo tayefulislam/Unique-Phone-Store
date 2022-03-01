@@ -173,7 +173,7 @@ const displayDetails = (phone) => {
             <div class="modal-body">
             <div>
             
-            <img class="detail-img" src="${phone?.image}">
+            <img src="${phone?.image}">
             <br>     
 
             <h3>Brand : ${checkData(phone?.brand)}</h3>
