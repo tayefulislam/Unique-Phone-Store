@@ -11,17 +11,17 @@
     background-color: rgb(199, 221, 230);
 }
 
+
+/* card image in body */
 .img-body{
     border-radius: 45px;
 }
 
-.bold{
-    font-style: blod;
-}
-
+/* alerts */
 .alert{
     color: red;
     text-align: center;
     display: none;
 }
+
 
