@@ -34,11 +34,12 @@ const loadData = (value) => {
 
 const result = (results) => {
     console.log(results);
+    console.log(results.slice(0, 20));
 
     setResult.innerHTML = ``;
 
     // for of loop in results array
-    for (const result of results) {
+    for (const result of results.slice(0, 20)) {
 
         const div = document.createElement('div');
 
@@ -46,7 +47,7 @@ const result = (results) => {
 
         div.innerHTML = `
                 <div class="card h-100">
-                        <img class="mt-3" src="${result.image}"
+                        <img class="mt-3 img-body" src="${result.image}"
                             class="card-img-top" alt="...">
                         <div class="card-body">
                             <h2 class="card-title">${result.phone_name}</h2>
@@ -70,12 +71,12 @@ const result = (results) => {
 }
 
 // Get Result by ID (slug)
-
 const details = (id) => {
     console.log(id)
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
         .then(result => displayDetails(result.data))
+    console.log(result.data);
 }
 
 // Display Modal (All Details)
@@ -114,7 +115,10 @@ const displayDetails = (phone) => {
             USB : ${phone.others.USB} <br>
             WLAN : ${phone.others.WLAN} <br>
             </p>
+
+            <p> <span class="fw-bold">SENSOR :</span> ${phone.mainFeatures.sensors} </p>
             </div >
+
 
     </div >
 
@@ -135,3 +139,15 @@ const releaseDateCheck = (value) => {
     }
 }
 
+// check sennor
+
+// const checkSensor = (sensor) => {
+
+//     sensors.forEach(sensor => {
+
+//         console.log(sensor);
+
+//     });
+
+
+// }

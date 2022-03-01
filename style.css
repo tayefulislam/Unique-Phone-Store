@@ -11,10 +11,11 @@
     background-color: rgb(199, 221, 230);
 }
 
-img{
+.img-body{
     border-radius: 45px;
 }
 
 .bold{
     font-style: blod;
 }
+
