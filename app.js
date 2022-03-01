@@ -1,5 +1,60 @@
+
+//grobal Varailbe
+
 // get result field 
 const setResult = document.getElementById('result');
+
+
+// common funtion 
+
+
+// Check Release Date
+const releaseDateCheck = (value) => {
+
+    console.log(value)
+    if (value === "") {
+        return "Released Date Not Found"
+    }
+    else {
+        return value;
+    }
+}
+
+
+//check data 
+
+const checkData = (value) => {
+
+    if (value === undefined) {
+        return " Data Not Found"
+    }
+
+    else {
+        return value;
+    }
+
+
+
+}
+
+
+
+//sensor 
+
+const sensor = (sensors) => {
+    let totalSensor = '';
+    sensors.forEach(sensor => {
+        totalSensor = totalSensor + sensor + ', ';
+    });
+
+    let totalSensorDot = totalSensor.slice(0, totalSensor.length - 2)
+    return totalSensorDot + '.';
+}
+
+
+
+
+
 
 // take user input
 document.getElementById('search-btn').addEventListener('click', function () {
@@ -79,12 +134,13 @@ const details = (id) => {
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
         .then(result => displayDetails(result.data))
-    console.log(result.data);
+
 }
 
 // Display Modal (All Details)
 
 const displayDetails = (phone) => {
+
 
     const modalId = document.getElementById('detail-modal');
     modalId.innerHTML = `
@@ -98,47 +154,40 @@ const displayDetails = (phone) => {
     <div class="modal-body">
             <div>
             
-            <img src="${phone.image}">
+            <img src="${phone?.image}">
             <br>
 
-            <h3>Brand : ${phone.brand}</h3>
-            <h5>${releaseDateCheck(phone.releaseDate)}</h5>
+            <h3>Brand : ${checkData(phone?.brand)}</h3>
+            <h5>${releaseDateCheck(checkData(phone?.releaseDate))}</h5>
             <h4>Features:</h4>
             <p>
-            <span class="fw-bold"> Storage :</span> ${phone.mainFeatures.storage} <br>
-            <span class="fw-bold"> Display Size :</span> ${phone.mainFeatures.displaySize} <br>
-            <span class="fw-bold"> Chip Set :</span> ${phone.mainFeatures.chipSet} <br>
-            <span class="fw-bold"> Memory :</span> ${phone.mainFeatures.memory} <br>
+            <span class="fw-bold"> Storage :</span> ${checkData(phone.mainFeatures?.storage)} <br>
+            <span class="fw-bold"> Display Size :</span> ${checkData(phone.mainFeatures?.displaySize)} <br>
+            <span class="fw-bold"> Chip Set :</span> ${checkData(phone.mainFeatures?.chipSet)} <br>
+            <span class="fw-bold"> Memory :</span> ${checkData(phone.mainFeatures?.memory)} <br>
             </p>
 
             <h4>Others:</h4>
-            <p> <span class="fw-bold"> Bluetooth :</span> ${phone.others.Bluetooth} <br>
-            <span class="fw-bold"> GPS :</span> ${phone.others.GPS} <br>
-            <span class="fw-bold"> NFC :</span> ${phone.others.NFC} <br>
-            <span class="fw-bold"> Radio :</span> ${phone.others.Radio} <br>
-            <span class="fw-bold"> USB :</span> ${phone.others.USB} <br>
-            <span class="fw-bold"> WLAN :</span> ${phone.others.WLAN} <br>
+
+            <p> <span class="fw-bold"> Bluetooth :</span> ${checkData(phone.others?.Bluetooth)} <br>
+            <span class="fw-bold"> GPS :</span> ${checkData(phone.others?.GPS)} <br>
+            <span class="fw-bold"> NFC :</span> ${checkData(phone.others?.NFC)} <br>
+            <span class="fw-bold"> Radio :</span> ${checkData(phone.others?.Radio)} <br>
+            <span class="fw-bold"> USB :</span> ${checkData(phone.others?.USB)} <br>
+            <span class="fw-bold"> WLAN :</span> ${checkData(phone.others?.WLAN)} <br>
+           
             </p>
 
-            <p> <span class="fw-bold">SENSOR :</span> ${phone.mainFeatures.sensors} </p>
+            <p> <span class="fw-bold">SENSOR :</span> ${checkData(sensor(phone.mainFeatures?.sensors))} </p>
+
             </div >
+
+            
 
 
     </div >
 
     `
-    console.log(phone)
+    console.log(phone.mainFeatures?.sensors)
 }
 
-
-// Check Release Date
-const releaseDateCheck = (value) => {
-
-    console.log(value)
-    if (value === "") {
-        return "Released Date Not Found"
-    }
-    else {
-        return value;
-    }
-}
