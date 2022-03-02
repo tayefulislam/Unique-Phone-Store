@@ -24,7 +24,7 @@ const releaseDateCheck = (valueDate) => {
 const checkData = (valueData) => {
 
     if (valueData === undefined) {
-        return " Data Not Found";
+        return "Info is not found";
     }
 
     else {
@@ -56,7 +56,7 @@ const showAlert = (alertId, alert) => {
 
 
 // take user input
-document.getElementById('search-btn').addEventListener('click', function () {
+const search = () => {
 
     const getInput = document.getElementById('search');
     const inputValue = getInput.value.toLowerCase();
@@ -75,7 +75,7 @@ document.getElementById('search-btn').addEventListener('click', function () {
         return loadData(inputValue);
     }
 
-});
+};
 
 
 // loadData
@@ -148,6 +148,7 @@ const searchResult = (results) => {
 // Get Result by ID (slug)
 
 const details = (phoneId) => {
+    console.log(phoneId)
     fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
         .then(res => res.json())
         .then(result => displayDetails(result.data))

@@ -13,7 +13,7 @@
     <!-- css style -->
     <link rel="stylesheet" href="style.css">
 
-    <title>Unique Store</title>
+    <title>Unique Phone Store</title>
 
 </head>
 
@@ -21,7 +21,7 @@
 
     <!-- header title -->
     <header>
-        <h1 id="title">Unique Store</h1>
+        <h1 id="title">Unique Phone Store</h1>
     </header>
 
 
@@ -31,8 +31,9 @@
         <section>
             <div class="mx-auto mt-3">
                 <div class="input-group mb-3">
-                    <input id="search" type="text" class="form-control" placeholder="Search Your Favorite Things">
-                    <button id="search-btn" class="btn btn-outline-secondary bg-success text-white"><span
+                    <input id="search" type="text" class="form-control" placeholder="Search Your Favorite Phone">
+                    <button id="search-btn" onclick="search()"
+                        class="btn btn-outline-secondary bg-success text-white"><span
                             class="fs-5 fw-bold">Search</span></button>
                 </div>
             </div>
@@ -43,7 +44,7 @@
 
         <section>
             <h1 id="not-found" class="alert">Results Not Found</h1>
-            <h1 id="empty" class="alert">Please Write something</h1>
+            <h1 id="empty" class="alert">Please Write Something</h1>
         </section>
 
         <!-- result section -->
