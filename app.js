@@ -78,7 +78,7 @@ const search = () => {
 };
 
 
-// loadData
+// loadData 
 const loadData = (inputValue) => {
 
     const url = `https://openapi.programming-hero.com/api/phones?search=${inputValue}`;
